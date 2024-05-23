@@ -1,0 +1,123 @@
+/* main.css */
+
+* {
+    font-family: Arial, sans-serif;
+    font-size: 16pt;
+    color: #3c4043;
+}
+
+/* Generales */
+QWidget {
+    background-color: #f5f5f5;
+    color: #3c4043;
+}
+
+QPushButton {
+    background-color: #9ea7aa;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: #80868b;
+}
+
+QPushButton:focus {
+    border: 2px solid #3c4043;
+}
+
+QLabel {
+    font-size: 16pt;
+    color: #3c4043;
+    padding: 5px;
+}
+
+QLabel#defaultCharacterLabel {
+    background-color: #f5f5f5;
+    font-size: 22pt;
+}
+
+QLineEdit,
+QPlainTextEdit {
+    font-size: 16pt;
+    background-color: #f5f5f5;
+    color: #3c4043;
+    border: 1px solid #9ea7aa;
+    border-radius: 3px;
+}
+
+QLineEdit:hover,
+QPlainTextEdit:hover {
+    border: 1px solid #3c4043;
+}
+
+QLineEdit:focus,
+QPlainTextEdit:focus {
+    border: 2px solid #1e90ff;
+}
+
+QTableWidget {
+    border: 1px solid #9ea7aa;
+    font-size: 14pt;
+}
+
+/* Específicos */
+
+QPushButton#saveButton {
+    background-color: #01ff45c2;
+    /* Green */
+    font-size: 16pt;
+    color: #3c4043;
+}
+
+QPlainTextEdit#dialogueText {
+    background-color: #f5f5f5;
+    font-weight: normal;
+    font-size: 16pt;
+}
+
+QPlainTextEdit#dialogueText:hover {
+    background-color: #e6e6e6;
+}
+
+QPlainTextEdit#completedDialogue {
+    background-color: #3cf86e;
+    /* Green */
+    font-weight: normal;
+    font-size: 16pt;
+}
+
+QLabel#defaultCharacterLabel {
+    background-color: #f5f5f5;
+    font-size: 22pt;
+}
+
+QLabel#completedLabel {
+    background-color: #3cf86e;
+    /* Green */
+    font-weight: normal;
+    font-size: 22pt;
+}
+
+QLabel#characterLabelActiveSearch {
+    background-color: #fbbc04;
+    /* Yellow */
+    font-weight: normal;
+    font-size: 22pt;
+}
+
+QCheckBox::indicator {
+    width: 25px;
+    height: 25px;
+}
+
+QLabel#characterLabel:hover {
+    background-color: lightblue;
+}
+
+QPlainTextEdit#dialogueText:hover,
+QPlainTextEdit#dialogueText:focus {
+    background-color: lightyellow;
+}

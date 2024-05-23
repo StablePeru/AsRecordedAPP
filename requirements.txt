@@ -1,0 +1,4 @@
+pandas
+python-docx
+pyqt5
+tkinter
