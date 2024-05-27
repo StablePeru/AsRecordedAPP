@@ -87,4 +87,4 @@ Este proyecto está licenciado bajo la [MIT License](LICENSE).
 
 ## Contacto
 
-Para cualquier pregunta o sugerencia, por favor contacta a stableperu@mixer.eus.
+Para cualquier pregunta o sugerencia, por favor contacta a stableperu@gmail.com.
