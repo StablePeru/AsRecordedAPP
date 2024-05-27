@@ -16,26 +16,24 @@
 ## Estructura del Proyecto
 
 ```plaintext
-AsRecordedAPP/
-├── AsRecordedAPP_1.0/  # Versión anterior
-├── AsRecordedAPP_1.1/  # Nueva versión
-│   ├── datahandler/
-│   │   ├── __init__.py
-│   │   ├── data_handler.py
-│   │   ├── data_validator.py
-│   │   ├── excel_handler.py
-│   │   └── exceptions.py
-│   ├── gui/
-│   │   ├── __init__.py
-│   │   ├── main_window.py
-│   │   ├── main_widget.py
-│   │   ├── gidoia_widget.py
-│   │   ├── character_filter_dialog.py
-│   │   ├── custom_widgets.py
-│   │   └── utils.py
-│   ├── resources/
-│   │   └── main.css
-│   └── main.py
+AsRecordedAPP_1.1/  # Nueva versión
+├── datahandler/
+│   ├── __init__.py
+│   ├── data_handler.py
+│   ├── data_validator.py
+│   ├── excel_handler.py
+│   └── exceptions.py
+├── gui/
+│   ├── __init__.py
+│   ├── main_window.py
+│   ├── main_widget.py
+│   ├── gidoia_widget.py
+│   ├── character_filter_dialog.py
+│   ├── custom_widgets.py
+│   └── utils.py
+├── resources/
+│   └── main.css
+├── main.py
 └── README.md
 ```
 
@@ -44,8 +42,7 @@ AsRecordedAPP/
 1. Clona este repositorio:
 
     ```sh
-    git clone https://github.com/StablePeru/AsRecorded.git
-    cd AsRecordedAPP/AsRecordedAPP_1.1
+    git clone https://github.com/StablePeru/AsRecordedAPP_1.1.git
     ```
 
 2. Crea y activa un entorno virtual (opcional pero recomendado):
