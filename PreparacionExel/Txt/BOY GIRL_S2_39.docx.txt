@@ -1,0 +1,266 @@
+TAKE: 1    
+IN: 00:00:21:06
+IZENBURUA: 	Konponketa negozioa
+DOG: 	(ad lib)
+CAT: 	(ad lib)
+DOG: 	(ad lib)
+BOY: 	(ad lib) ... Ez! O, Patinetetxo.
+DOG: 	Ondo zaude, Mutil? Nork egin dizu hau? Usoa izan da? Utzi
+neuri! (ad lib) Bai, egin korrika! Hau da, hegan!
+BOY: 	Milesker, Txakur, baina ez nengoen patinetean, apurtu
+denean.
+OUT: 00:00:50:02
+TAKE: 2    
+IN: 00:00:50:02
+GIRL: 	Eta zergatik daramzu kaskoa?
+BOY: 	Kalean barrena ibiltzea arriskutsua delako, edozer gerta
+liteke! Ondo zegoen lehen! Ez duzue ikusi zer jazo den?
+OUT: 00:01:03:23
+TAKE: 3    
+IN: 00:01:04:20
+TV MAN: 	O, Miranda.
+MOM: 	Gazta! Mesedez, atera zaborra!
+CHEESE: 	(ad lib)
+TV MAN: 	(off) Maite dudan emakume bakarra zara.
+CHEESE: 	(barrea)
+OUT: 00:01:23:13
+TAKE: 4    
+IN: 00:01:24:03
+CHEESE: 	E, ez, ez dakit zer gertatu den. Txakurrek esandako usoa
+izango zen.
+MOUSE: 	Ez kezkatu, Mutil! Konponketen maisua naizenez, neuk
+konponduko dizut!
+CHEESE: 	Zergatik? Patinete hori kaskarra zen! Bota eta erosi bat
+hobea! Eta txikiagoa. Gazta neurrikoa.
+GIRL: 	Egon, zergatik ez duzu eraldatzen? Saguk konpon dezala eta
+Gaztak apain dezala. Murriztu, berrerabili, birziklatu.
+MOUSE: 	Interesgarria. Zer diozu, Gazta? Patinetea konpontzen
+badut, zu hura apaintzeko gauza izango zara?
+OUT: 00:01:54:21
+TAKE: 5    
+IN: 00:01:55:11
+CHEESE: 	(ad lib) Nik edozer apaindu dezaket! Mutil izan ezik. Ea ba, has
+gaitezen. Eraldatze taldea, aurrera! Bai!
+BOY: 	(batera) Bai!
+GIRL: 	(batera)
+DOG: 	(batera)
+MOUSE: 	(batera)
+CAT: 	(batera) (ad lib)
+BOY: 	Eraldatu! Zer da?
+OUT: 00:02:07:10
+TAKE: 6    
+IN: 00:02:07:10
+BOY: 	Uau! Normalean diseinu soilak gustatzen zaizkit, baina
+ohitu naiteke honetara.
+GIRL: 	Itzela da! Negozio bat ireki behar zenukete jendeari gauzak
+konpontzeko.
+DOG: 	Ideia ona! Eta guk lagunduko dizuegu! Ez dugu ezer egin
+batera familia gisa... sekula!
+GIRL: 	E... Hori baino ez dugu egiten.
+CHEESE: 	Aurrera! Arrakasta badugu azkenean gaztelu bat erosiko dut
+eta denok gonbidatuko zaituztet zerbitzari gisa.
+OUT: 00:02:35:21
+TAKE: 7    
+IN: 00:02:35:21
+MOUSE: 	Bueno, aste honetan aire-kutsadurarena konpondu nahi nuen,
+baina... ados!
+OUT: 00:02:42:09
+TAKE: 8    
+IN: 00:02:45:02
+CHEESE: 	Apurtutako zerbait duzue? Ba guk konponduko dizugu eta
+itxura hobetuko diogu! Eman izena orain eta lortu irabiaki
+bat doan. Irabiakiaren eskaintza agortu da.
+DOG: 	Hau hautsita zegoen. Sinestezina, ezta?
+OLD LADY MCGUIRE: 	(ad lib)
+MUTIL 1: 	(ad lib)
+CAT: 	(ad lib)
+MUTIL 1: 	Uala! - Sinestezina! - (barrea) ... Aupa! - Aupa! - Bai!
+OLD LADY MCGUIRE:
+MUTIL 2:
+TXAKUR MARROIA:
+NESKA 1:
+OUT: 00:03:13:24
+TAKE: 9    
+IN: 00:03:13:24
+CHEESE: 	Iufi, arrakasta izango dugu!
+MOUSE: 	O, benetan, Katu? Dagoeneko?
+CAT: 	(ad lib)
+BOY: 	(ad lib)
+DOG: 	(ad lib)
+MOUSE: 	(ad lib)
+OUT: 00:03:41:20
+TAKE: 10    
+IN: 00:03:41:20
+CAT: 	(ad lib)
+MOUSE: 	(ad lib)
+OUT: 00:03:53:04
+TAKE: 11    
+IN: 00:03:56:20
+MOUSE: 	Mesedez! Ez hartu eskari gehiago. Nekatuta nago!
+DOG: 	Baina, Sagu, jendeari laguntzea itzela da!
+GIRL: 	Gainera, Gazta lanpetuta dagoenez, ez dabil harrokeriatan.
+Nekatuta bazaude, egin kuluxka bat.
+MOUSE: 	Saiatzen naizen bakoitzean, esnatu egiten nauzue! Gauza
+gehiegi dugu konpontzeko eta denbora gutxiegi! Eta begira
+Mutili!
+BOY: 	(ad lib)
+CAT: 	(ad lib)
+OUT: 00:04:23:12
+TAKE: 12    
+IN: 00:04:23:12
+CHEESE: 	Lasai! Gainera, birziklatzeak Lurraren berotzea konpontzen
+laguntzen du. Edo Lurra gorroto duzu? E? Hara, Sagu,
+gehiegi bada, egin konponketa errazak. Kolaz itsatsi eta
+kito!
+MOUSE: 	Uaaa. Ez, ez. Lehenik hidroteknologiaz altzairua urtu behar
+da, gero lotura-eragile bat asmatu behar dut hori...
+CHEESE: 	(ad lib) Ez! Kola! Nik esandakoa! Itzel! Konponduta! Lanera!
+OUT: 00:04:50:08
+TAKE: 13    
+IN: 00:04:50:08
+MOUSE: 	Ez. Gauza hauek behar bezala konpondu behar dira. Eta lo
+egiten ez badut, ezin dut ezer konpondu!
+BOY: 	(ad lib) Saguk arrazoi du! Bihar jarraituko dugu. Ai ama! Irrikan
+nago nire ohetxo goxo, eroso, leunera joateko eta han
+barruan goxo-goxo uzkurtu eta... (ad lib)
+MOUSE: 	(batera) (ad lib)
+OUT: 00:05:20:01
+TAKE: 14    
+IN: 00:05:20:01
+CAT: 	(ad lib)
+MOUSE: 	A! Fresko-fresko eta poz-pozik sentitzen naiz! Ezerk ez nau
+haserretuko eta... Ezin dut sinetsi!
+BOY: 	Oraindik eskariak onartzen? Atzo garbi esan genuen ba.
+Gauza gehiegi dugu konpontzeko jada!
+GIRL: 	Lasai! Bart ia eskari guztiez arduratu ginen, pare bat
+baino ez da geratzen.
+MOUSE: 	Baina nola konpondu zenuten hainbeste gauza hain azkar? Eta
+ni gabe?
+OUT: 00:05:50:00
+TAKE: 15    
+IN: 00:05:50:00
+CHEESE: 	Katu eta Txakur arduratu dira denaz. Eta ez dira zuek
+bezainbeste kexatu. Gauzak konpontzea ez da hain zaila.
+MOUSE: 	(ad lib) Horri esaten diozue konpontzea? Ez dakit zer daukadan
+aurrean ere! Aski da! Ez dut onartuko nire izena negozio
+axolagabe bati lotuta egotea. Utzi egiten dut!
+BOY: 	Nik ere bai!
+OUT: 00:06:17:23
+TAKE: 16    
+IN: 00:06:19:05
+BURLINGTON: 	Kaixo! Nire etxezainak zuen zerbitzua aipatu dit eta
+txundituta nago! Ez nekien hautsitako gauzak konpondu
+daitezkenik! Nire lanpara konpon dezakezue? Festa bat dut
+gaur gauean eta gonbidatuak txunditu behar ditut.
+GIRL: 	Ordubete barru izango duzu! Gauza zarete!
+DOG: 	(batera) (ad lib)
+CAT: 	(ad lib)
+DOG: 	Ondo dagoela uste duzu?
+OUT: 00:06:49:13
+TAKE: 17    
+IN: 00:06:51:05
+CAT: 	(ad lib)
+OLD LADY MCGUIRE: 	A, nire ipotxa! Nork babestuko dit etxea orain? Konpondu
+duzuela esan didazue!
+CHEESE: 	Ez kezkatu, berriro konponduko dut! Txakur, konpondu
+berriro.
+GIRL: 	E, aizue? Ez ote ditugu gauzak azkarregi konpondu?
+CHEESE: 	Ez! Ez dut uste.
+UNCLE BUB: 	(off) Nire mahaia!
+RIPPED ABMAN: 	(off) Nire irrati-kasetea!
+CHARLOTTE: 	(off) (ad lib)
+OUT: 00:07:20:13
+TAKE: 18    
+IN: 00:07:21:04
+CHEESE: 	Bueno, agian azkarregi konpondu ditugu.
+GIRL: 	Konpondutako gauzak berreskuratu behar ditugu. Orain!
+OUT: 00:07:28:11
+TAKE: 19    
+IN: 00:07:28:11
+CHEESE: 	Hauxe da dena! Txakur, konpon itzazu ondo eta eraman Saguk
+ikusi baino lehen.
+DOG: 	E, ezin ditut konpondu. Sagu da aditua, gogoratzen?
+GIRL: 	Armairua, eginda. Pufa, eginda. E, aizue, Burlington
+andrearen lanpara ahaztu zaizue.
+DOG: 	Ez zaigu ahaztu lanpara! Zer uste duzu... Ba bai, ahaztu
+egin zaigu.
+CHEESE: 	O, ez! Bere festa hastera doa! Lanpara jaitsi behar dugu
+sabaitik erori baino lehen!
+OUT: 00:07:57:21
+TAKE: 20    
+IN: 00:07:57:21
+MOUSE: 	Zer? Lanpara bat erori egingo da festa batean zuen
+konponketaren erruz?
+CHEESE: 	Bai! Baina utzi liskarrak orain. Lagundu, mesedez!
+BOY: 	Bueno, bai, noski! Goazen!
+CAT: 	(ad lib)
+DOG: 	Goazen, Katu!
+OUT: 00:08:16:10
+TAKE: 21    
+IN: 00:08:19:00
+BUTLER: 	Egon, nora zoazte?
+CHEESE: 	Arin! Lanpara hautsi eta lurrera eroriko da!
+BUTLER: 	(ad lib) Etxezain baten lehen araua hau da: inoiz ez sinetsi esneki
+hiztun bati. Ospa! Ez zaude zerrendan.
+CAT: 	(ad lib)
+BUTLER: 	(ad lib) Katu! Zu bai, zerrendan zaude. Sartu!
+MOUSE: 	Badakizu zer egin, Katu!
+CAT: 	(ad lib)
+OUT: 00:08:46:02
+TAKE: 22    
+IN: 00:08:47:09
+CAT: 	(ad lib)
+BURLINGTON: 	Nork nahi du mokadu fin bat?
+CAT: 	(ad lib)
+MOUSE: 	A, putza, horra sartu eta mundu guztia atera beharko dugu.
+Baina nola engainatuko dugu etxezaina?
+DOG: 	Utzi neuri! Plan bikain bat daukat, oso argia, oso
+konplexua, etxezaina zur eta lur utziko duena.
+OUT: 00:09:11:14
+TAKE: 23    
+IN: 00:09:12:03
+DOG: 	E! Etxezaina! Kiratsa darizu! (ad lib) (barrea)
+BUTLER: 	(ad lib) Ez darit kiratsik! Ospa hemendik, aizu!
+BURLINGTON: 	Zer egiten duzue hemen, gazteak?
+BOY: 	E... Printze batek bidali gaitu. Bartington? Bai, hona
+etorri da bizitzera eta zuen zain dago kanpoan.
+OUT: 00:09:41:21
+TAKE: 24    
+IN: 00:09:43:10
+BURLINGTON: 	(ad lib) Bartington printzea? Ez dut ezagutzen.
+CHEESE: 	E, aberatsa da.
+BURLINGTON: 	A, bai, Bartington printzea! Goazen, gonbidatuak.
+CAT: 	(ad lib)
+BOY: 	(ad lib)
+GIRL:
+DOG:
+MOUSE:
+CHEESE:
+CAT: 	(ad lib)
+BOY: 	(ad lib)
+GIRL:
+DOG:
+MOUSE:
+OUT: 00:10:08:24
+TAKE: 25    
+IN: 00:10:08:24
+CHEESE: 	(batera) (ad lib) (ad lib) Sagu, arrazoi duzu, konponketaren zatia apaintzearena
+bezain garrantzitsua da. Sentitzen dut.
+GIRL: 	Bai, eta familia gisa zerbait egitea itzela den arren,
+hurrengoan elkarri entzun behar diogu. (ad lib)
+BOY: 	(batera) (ad lib)
+CHEESE: 	(batera) (ad lib)
+DOG: 	(batera) (ad lib)
+CAT: 	(batera) (ad lib)
+MOUSE: 	(batera) (ad lib)
+BURLINGTON: 	Ai ene! Nire lanpara guztien artean hauxe zen nire
+hamalaugarren kutuna.
+CHEESE: 	Burlington andrea. Ez dugu ondo konpondu eta asko, asko
+sentitzen dugu.
+OUT: 00:10:35:23
+TAKE: 26    
+IN: 00:10:35:23
+BURLINGTON: 	Mmm, denok egiten ditugu akatsak eta lezioa ikasi baduzue,
+zuen barka onartzen dut. Orain, zuen baimenarekin, komunera
+joan behar dut. ... (ad lib)
+OUT: 00:10:56:06
