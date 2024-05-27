@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QLineEdit, 
     QTextEdit, QFileDialog, QGridLayout, QCheckBox, QMessageBox, QCompleter, QTableWidget, QTableWidgetItem, 
-    QProgressBar, QPlainTextEdit, QScrollArea, QStyleFactory, QSizePolicy, QShortcut
+    QProgressBar, QPlainTextEdit, QScrollArea, QStyleFactory, QSizePolicy, QShortcut, QDialog
 )
 from PyQt5.QtCore import Qt, pyqtSignal, QEvent, QTimer
 from PyQt5.QtGui import QValidator, QResizeEvent, QKeySequence
@@ -31,6 +31,52 @@ class CustomMessageBox(QMessageBox):
             if isinstance(widget, QLabel):
                 widget.setStyleSheet("font-weight: 12px;")
 
+class CharacterFilterDialog(QDialog):
+    def __init__(self, parent=None, character_names=None, active_characters=None):
+        super().__init__(parent)
+        self.setWindowTitle("Seleccionar Personajes")
+        self.character_names = character_names if character_names else []
+        self.active_characters = active_characters if active_characters else {}
+        self.layout = QVBoxLayout(self)
+        self.checkboxes = {}
+        self.init_ui()
+
+    def init_ui(self):
+        self.search_bar = QLineEdit()
+        self.search_bar.setPlaceholderText("Buscar personajes...")
+        self.search_bar.textChanged.connect(self.filter_characters)
+        self.layout.addWidget(self.search_bar)
+
+        self.character_container = QWidget()
+        self.character_layout = QVBoxLayout(self.character_container)
+        
+        for character in self.character_names:
+            checkbox = QCheckBox(character)
+            checkbox.setChecked(self.active_characters.get(character, True))
+            self.character_layout.addWidget(checkbox)
+            self.checkboxes[character] = checkbox
+
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidget(self.character_container)
+        self.scroll_area.setWidgetResizable(True)
+        self.layout.addWidget(self.scroll_area)
+
+        self.save_button = QPushButton("Guardar")
+        self.save_button.clicked.connect(self.save_selection)
+        self.layout.addWidget(self.save_button)
+
+    def filter_characters(self, text):
+        for character, checkbox in self.checkboxes.items():
+            checkbox.setParent(None)
+            if text.lower() in character.lower():
+                self.character_layout.addWidget(checkbox)
+
+    def save_selection(self):
+        for character, checkbox in self.checkboxes.items():
+            self.active_characters[character] = checkbox.isChecked()
+        self.accept()
+
+
 class MainWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -41,7 +87,7 @@ class MainWidget(QWidget):
         self.open_button.setObjectName("openButton")
         self.open_button.clicked.connect(self.open_new_excel)
 
-        self.go_button = QPushButton("Ir al Guion")
+        self.go_button = QPushButton("Ir a Gidoia")
         self.go_button.setObjectName("goButton")
         self.go_button.clicked.connect(self.go_to_gidoia)
 
@@ -63,7 +109,7 @@ class MainWidget(QWidget):
 
     def go_to_gidoia(self):
         if not self.window().data_handler:
-            QMessageBox.warning(self, "Error", "No has seleccionado el Excel")
+            QMessageBox.warning(self, "Error", "Ez duzu Excel-a aukeratu")
             return
         self.window().gidoia_widget = GidoiaWidget(self.window().data_handler, self.window())
         self.window().setCentralWidget(self.window().gidoia_widget)
@@ -128,6 +174,7 @@ class GidoiaWidget(QWidget):
         self.current_take_number = 1
         self.character_name = None
         self.search_active = False
+        self.active_characters = {name: True for name in self.get_character_names()}
         self.main_layout = QVBoxLayout(self)
         self.setLayout(self.main_layout)
         self.create_search_layouts()
@@ -153,14 +200,14 @@ class GidoiaWidget(QWidget):
         self.take_search_layout = QHBoxLayout()
         self.take_number_input = QLineEdit()
         self.take_number_input.returnPressed.connect(self.load_take_from_input)
-        self.take_search_button = self.create_button("Buscar Take", self.load_take_from_input)
+        self.take_search_button = self.create_button("Take-a bilatu", self.load_take_from_input)
         self.take_search_layout.addWidget(self.take_number_input)
         self.take_search_layout.addWidget(self.take_search_button)
 
         self.character_search_layout = QHBoxLayout()
         self.character_input = QLineEdit()
         self.character_input.returnPressed.connect(self.load_character_from_input)
-        self.character_search_button = self.create_button("Buscar Personaje", self.load_character_from_input)
+        self.character_search_button = self.create_button("Pertsonaia bilatu", self.load_character_from_input)
         self.character_search_layout.addWidget(self.character_input)
         self.character_search_layout.addWidget(self.character_search_button)
 
@@ -172,8 +219,10 @@ class GidoiaWidget(QWidget):
     def create_navigation_buttons(self):
         self.navigation_layout = QHBoxLayout()
         self.prev_button = self.create_button("Take anterior", self.load_previous_take)
+        self.characters_button = self.create_button("Personajes", self.open_character_filter_dialog)
         self.next_button = self.create_button("Siguiente Take", self.load_next_take)
         self.navigation_layout.addWidget(self.prev_button)
+        self.navigation_layout.addWidget(self.characters_button)
         self.navigation_layout.addWidget(self.next_button)
         self.main_layout.addLayout(self.navigation_layout)
 
@@ -183,11 +232,11 @@ class GidoiaWidget(QWidget):
         self.main_layout.addWidget(self.take_label)
 
     def create_save_button(self):
-        self.save_button = self.create_button("Guardar", self.save_changes)
+        self.save_button = self.create_button("Aldaketak gorde", self.save_changes)
         self.main_layout.addWidget(self.save_button)
 
     def create_back_button(self):
-        self.back_button = self.create_button("Pagina principal", self.go_back)
+        self.back_button = self.create_button("Main Page", self.go_back)
         self.main_layout.addWidget(self.back_button)
 
     def create_button(self, text, function):
@@ -199,7 +248,7 @@ class GidoiaWidget(QWidget):
         return self.data_handler.get_character_names()
 
     def go_back(self):
-        reply = QMessageBox.question(self, "Guardar", "Quieres guardar los cambios?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
+        reply = QMessageBox.question(self, "Gorde", "Programa itxi aurretik gorde nahi?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
         if reply == QMessageBox.Cancel:
             return
         if reply == QMessageBox.Yes:
@@ -207,15 +256,20 @@ class GidoiaWidget(QWidget):
         self.window().main_widget = MainWidget(self.window())
         self.window().setCentralWidget(self.window().main_widget)
 
+    def open_character_filter_dialog(self):
+        dialog = CharacterFilterDialog(self, self.get_character_names(), self.active_characters)
+        if dialog.exec_():
+            self.active_characters = dialog.active_characters
+            self.load_take(self.current_take_number)
 
     def validate_take_number(self, take_number):
         try:
             take_number = int(take_number)
         except ValueError:
-            QMessageBox.warning(self, "Alerta", "Numero de Take no valido.")
+            QMessageBox.warning(self, "Warning", "Invalid take number.")
             return None
         if not (1 <= take_number <= len(self.data_handler.takes)):
-            QMessageBox.warning(self, "Alerta", "No hay mas Takes.")
+            QMessageBox.warning(self, "Warning", "Gidoiak ez ditu ainbeste Take.")
             return None
         return take_number
 
@@ -230,11 +284,11 @@ class GidoiaWidget(QWidget):
         character_name = character_name.upper()
         upper_case_characters = self.data_handler.intervenciones['Personaje'].str.upper()
         if character_name not in upper_case_characters.values:
-            QMessageBox.warning(self, "Alerta", "No existe ese personaje.")
+            QMessageBox.warning(self, "Warning", "Pertsonai hori ez dago.")
             return None
         character_dialogue = self.data_handler.intervenciones[upper_case_characters == character_name]
         if character_dialogue['Completo'].all():
-            QMessageBox.warning(self, "Alerta", "El personaje esta completo.")
+            QMessageBox.warning(self, "Warning", "Pertsonai hori bukatua dago.")
             return None
         return character_name
 
@@ -249,11 +303,10 @@ class GidoiaWidget(QWidget):
                 self.current_take_number = take_number
                 self.load_take(self.current_take_number)
             else:
-                QMessageBox.warning(self, "Alerta", f"No hay más intervenciones incompletas para el personaje {character_name}")
+                QMessageBox.warning(self, "Warning", f"No hay más intervenciones incompletas para el personaje {character_name}")
             if not hasattr(self, 'cancel_search_button'):
-                self.cancel_search_button = self.create_button("Terminar busqueda", self.cancel_character_search)
+                self.cancel_search_button = self.create_button("Bilaketa bukatu", self.cancel_character_search)
                 self.character_search_layout.addWidget(self.cancel_search_button)
-
 
     def find_next_incomplete_take(self, start_take, character_name, direction):
         max_take = self.data_handler.takes['Numero Take'].max()
@@ -270,7 +323,6 @@ class GidoiaWidget(QWidget):
         
         return None
 
-
     def cancel_character_search(self):
         self.character_name = None
         self.search_active = False
@@ -284,7 +336,7 @@ class GidoiaWidget(QWidget):
         try:
             take_data = self.data_handler.get_take(take_number)
             dialogue_data = self.data_handler.get_dialogue(take_number)
-            self.take_label.setText(f"<b>Take {take_number}</b>: {take_data['IN'].values[0]} - {take_data['OUT'].values[0]}")
+            self.take_label.setText(f"Take {take_number}: {take_data['IN'].values[0]} - {take_data['OUT'].values[0]}")
         except KeyError as e:
             QMessageBox.critical(self, "Error", f"Missing column in data: {str(e)}")
             return
@@ -312,6 +364,8 @@ class GidoiaWidget(QWidget):
         dialogue_layout = QGridLayout()
         dialogue_widget.setLayout(dialogue_layout)
         for i, (index, row) in enumerate(dialogue_data.iterrows()):
+            if not self.active_characters.get(row['Personaje'], True):
+                continue
             try:
                 '''timecode_edit = self.create_timecode_edit(row)
                 self.timecode_edits[str(row['ID']) + 'Hasiera'] = timecode_edit
@@ -465,9 +519,9 @@ class GidoiaWidget(QWidget):
         
         if next_take is None or next_take < 1 or next_take > max_take:
             if self.search_active:
-                QMessageBox.warning(self, "Alerta", f"No hay más intervenciones incompletas para el personaje {self.character_name}")
+                QMessageBox.warning(self, "Warning", f"No hay más intervenciones incompletas para el personaje {self.character_name}")
             else:
-                QMessageBox.warning(self, "Alerta", "No hay más takes disponibles.")
+                QMessageBox.warning(self, "Warning", "No hay más takes disponibles.")
             return
 
         self.current_take_number = next_take
@@ -480,7 +534,7 @@ class GidoiaWidget(QWidget):
         self.load_adjacent_take(1)
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, "Guardar", "Guardar antes de cerrar?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
+        reply = QMessageBox.question(self, "Gorde", "Programa itxi aurretik gorde nahi?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
         if reply == QMessageBox.Cancel:
             event.ignore()
             return
@@ -585,7 +639,7 @@ class Application(QMainWindow):
 
     def handle_close_event(self):
         if self.data_handler:
-            reply = QMessageBox.question(self, "Guardar", "Quieres guardar antes de cerrar?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
+            reply = QMessageBox.question(self, "Gorde", "Programa itxi aurretik gorde nahi?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.Cancel)
             if reply == QMessageBox.Yes:
                 self.data_handler.save()
                 return True

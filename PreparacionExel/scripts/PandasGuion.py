@@ -58,18 +58,20 @@ def procesar_guion(archivo):
             out_time = re.findall(r'OUT: (\d+:\d+:\d+:\d+)', linea)[0]
             datos_takes['OUT'].append(out_time)
         else:  # Esto debe ser una intervención
-            intervencion = re.findall(r'([A-Z\s\d]+:)\s*(.*?)$', linea)
-            if intervencion:  # Si se encuentra un nuevo personaje y/o diálogo
-                guardar_intervencion()  # Guardar la intervención anterior antes de actualizar el personaje y diálogo
-                personaje_actual = intervencion[0][0].strip(":")
-                dialogo_actual = intervencion[0][1]
-            else:  # Si no se encuentra un nuevo personaje, asumir que es una continuación del diálogo actual
+            if '(' in linea and ')' in linea:  # Si la línea contiene paréntesis, no es un personaje
                 dialogo_actual += " " + linea.strip()
+            else:
+                intervencion = re.findall(r'([A-Z\s\d]+:)\s*(.*?)$', linea)
+                if intervencion:  # Si se encuentra un nuevo personaje y/o diálogo
+                    guardar_intervencion()  # Guardar la intervención anterior antes de actualizar el personaje y diálogo
+                    personaje_actual = intervencion[0][0].strip(":")
+                    dialogo_actual = intervencion[0][1]
+                else:  # Si no se encuentra un nuevo personaje, asumir que es una continuación del diálogo actual
+                    dialogo_actual += " " + linea.strip()
 
     guardar_intervencion()  # Asegurarse de añadir la última intervención
 
     return datos_takes, datos_intervenciones
-
 
 # Función para crear archivo de Excel
 def crear_excel(datos_takes, datos_intervenciones, directorio):
