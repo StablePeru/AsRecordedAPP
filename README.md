@@ -17,26 +17,33 @@
 
 ```plaintext
 AsRecordedAPP/
-├── AsRecordedAPP_1.0/  # Versión anterior
-├── AsRecordedAPP_1.1/  # Nueva versión
-│   ├── datahandler/
-│   │   ├── __init__.py
-│   │   ├── data_handler.py
-│   │   ├── data_validator.py
-│   │   ├── excel_handler.py
-│   │   └── exceptions.py
-│   ├── gui/
-│   │   ├── __init__.py
-│   │   ├── main_window.py
-│   │   ├── main_widget.py
-│   │   ├── gidoia_widget.py
-│   │   ├── character_filter_dialog.py
-│   │   ├── custom_widgets.py
-│   │   └── utils.py
-├── ├── myenv/
-│   ├── resources/
-│   │   └── main.css
-│   └── main.py
+├── datahandler/
+│   ├── __init__.py
+│   ├── data_handler.py
+│   ├── data_validator.py
+│   ├── excel_handler.py
+│   └── exceptions.py
+├── gui/
+│   ├── __init__.py
+│   ├── main_window.py
+│   ├── main_widget.py
+│   ├── gidoia_widget.py
+│   ├── character_filter_dialog.py
+│   ├── custom_widgets.py
+│   └── utils.py
+├── resources/
+│   └── main.css
+├── PreparacionExcel/
+│   ├── Excel/
+│   │   └── Excel de ejemplo
+│   ├── scripts/
+│   │   ├── CrearTxt.py  # Crea un txt adecuado para el programa con el word de referencia
+│   │   └── PandasGuion.py  # Crea el xlsx usando el txt de referencia
+│   ├── Txt/
+│   │   └── Txt de ejemplo  # Recomendado como plantilla para trabajar con el programa
+│   └── Word/
+│       └── Word de ejemplo  # Específico del programa usado en la empresa
+├── main.py
 └── README.md
 ```
 
@@ -46,14 +53,14 @@ AsRecordedAPP/
 
     ```sh
     git clone https://github.com/StablePeru/AsRecorded.git
-    cd AsRecordedAPP/AsRecordedAPP_1.1
+    cd AsRecordedAPP/AsRecordedAPP_1.2
     ```
 
 2. Crea y activa un entorno virtual (opcional pero recomendado):
 
     ```sh
-    python -m venv myenv
-    source myenv/bin/activate  # En Windows: .\myenv\Scripts ctivate
+    python -m venv venv
+    source venv/bin/activate  # En Windows: .\venv\Scripts ctivate
     ```
 
 3. Instala las dependencias:
