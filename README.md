@@ -61,15 +61,15 @@ AsRecordedAPP/
     python -m venv venv
     ```
 
-    2.1 En Mac
-        ```sh
-        source venv/bin/activate
-        ```
+    2.1 En **Mac**
+    ```sh
+    source venv/bin/activate
+    ```
 
-    2.1 En Windows
-        ```sh
-        .\venv\Scripts\activate
-        ```
+    2.1 En **Windows**
+   ```sh
+   .\venv\Scripts\activate
+   ```
 
 4. Instala las dependencias:
 
