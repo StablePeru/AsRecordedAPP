@@ -49,21 +49,29 @@ AsRecordedAPP/
 
 ## Instalación
 
-1. Clona este repositorio:
+1. Ve a la carpeta que desees y clona este repositorio:
 
     ```sh
     git clone https://github.com/StablePeru/AsRecorded.git
-    cd AsRecordedAPP/AsRecordedAPP_1.2
+    cd AsRecordedAPP
     ```
 
 2. Crea y activa un entorno virtual (opcional pero recomendado):
-
     ```sh
     python -m venv venv
-    source venv/bin/activate  # En Windows: .\venv\Scripts ctivate
     ```
 
-3. Instala las dependencias:
+    2.1 En Mac
+        ```sh
+        source venv/bin/activate
+        ```
+
+    2.1 En Windows
+        ```sh
+        .\venv\Scripts\activate
+        ```
+
+4. Instala las dependencias:
 
     ```sh
     pip install -r requirements.txt
