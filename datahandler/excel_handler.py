@@ -8,7 +8,7 @@ class ExcelHandler:
 
     def load_excel(self, file_path):
         try:
-            self.xls = pd.ExcelFile(file_path)
+            self.xls = pd.ExcelFile(file_path, engine='openpyxl')  # Asegurarse de utilizar openpyxl
             self.takes = self.xls.parse('Takes')
             self.intervenciones = self.xls.parse('Intervenciones')
         except FileNotFoundError:
@@ -18,7 +18,7 @@ class ExcelHandler:
 
     def save(self):
         try:
-            with pd.ExcelWriter(self.file_path) as writer:
+            with pd.ExcelWriter(self.file_path, engine='openpyxl') as writer:  # Asegurarse de utilizar openpyxl
                 self.takes.to_excel(writer, sheet_name='Takes', index=False)
                 self.intervenciones.to_excel(writer, sheet_name='Intervenciones', index=False)
             print("Changes saved successfully.")

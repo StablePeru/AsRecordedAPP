@@ -1,2 +1,4 @@
 pandas
 PyQt5
+docx
+openpyxl

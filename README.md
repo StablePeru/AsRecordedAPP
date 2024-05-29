@@ -33,6 +33,7 @@ AsRecordedAPP/
 │   │   ├── character_filter_dialog.py
 │   │   ├── custom_widgets.py
 │   │   └── utils.py
+├── ├── myenv/
 │   ├── resources/
 │   │   └── main.css
 │   └── main.py
@@ -51,8 +52,8 @@ AsRecordedAPP/
 2. Crea y activa un entorno virtual (opcional pero recomendado):
 
     ```sh
-    python -m venv env
-    source env/bin/activate  # En Windows: .\env\Scripts ctivate
+    python -m venv myenv
+    source myenv/bin/activate  # En Windows: .\myenv\Scripts ctivate
     ```
 
 3. Instala las dependencias:

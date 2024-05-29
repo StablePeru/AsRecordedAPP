@@ -1,5 +1,9 @@
+import logging
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog, QMessageBox, QTableWidget, QTableWidgetItem, QProgressBar
 from datahandler.data_handler import DataHandler
+
+# Configurar el logging
+logging.basicConfig(level=logging.DEBUG)
 
 class MainWidget(QWidget):
     def __init__(self, parent=None):
@@ -27,8 +31,14 @@ class MainWidget(QWidget):
     def open_new_excel(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Excel File", "", "Excel Files (*.xls *.xlsx)")
         if file_path:
-            self.window().data_handler = DataHandler(file_path)
-            self.update_table()
+            try:
+                logging.debug(f"Attempting to open file: {file_path}")
+                self.window().data_handler = DataHandler(file_path)
+                logging.debug("File opened successfully")
+                self.update_table()
+            except Exception as e:
+                logging.error(f"Failed to open the Excel file: {str(e)}")
+                QMessageBox.critical(self, "Error", f"Failed to open the Excel file: {str(e)}")
 
     def go_to_gidoia(self):
         if not self.window().data_handler:
@@ -37,12 +47,16 @@ class MainWidget(QWidget):
         self.window().set_gidoia_widget()
 
     def update_table(self):
-        data = self.window().data_handler.get_incomplete_characters()
-        self.table.setRowCount(len(data))
-        self.table.setColumnCount(3)
-        self.table.setHorizontalHeaderLabels(["Personaje", "Takes Restantes", "Porcentaje Completado"])
-        for i, row in data.iterrows():
-            self.insert_table_row(i, row)
+        try:
+            data = self.window().data_handler.get_incomplete_characters()
+            self.table.setRowCount(len(data))
+            self.table.setColumnCount(3)
+            self.table.setHorizontalHeaderLabels(["Personaje", "Takes Restantes", "Porcentaje Completado"])
+            for i, row in data.iterrows():
+                self.insert_table_row(i, row)
+        except Exception as e:
+            logging.error(f"Failed to update the table: {str(e)}")
+            QMessageBox.critical(self, "Error", f"Failed to update the table: {str(e)}")
 
     def insert_table_row(self, i, row):
         self.table.insertRow(i)
