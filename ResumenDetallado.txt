@@ -1,0 +1,79 @@
+AsRecordedAPP/
+├── datahandler/
+│   ├── __init__.py
+│   ├── data_handler.py
+│   ├── data_validator.py
+│   ├── excel_handler.py
+│   └── exceptions.py
+├── gui/
+│   ├── __init__.py
+│   ├── main_window.py
+│   ├── main_widget.py
+│   ├── gidoia_widget.py
+│   ├── character_filter_dialog.py
+│   ├── custom_widgets.py
+│   └── utils.py
+├── resources/
+│   └── main.css
+├── PreparacionExcel/
+│   ├── Excel/
+│   │   └── Excel de ejemplo
+│   ├── scripts/
+│   │   ├── CrearTxt.py  # Crea un txt adecuado para el programa con el Word de referencia
+│   │   └── PandasGuion.py  # Crea el xlsx usando el txt de referencia
+│   ├── Txt/
+│   │   └── Txt de ejemplo  # Recomendado como plantilla para trabajar con el programa
+│   └── Word/
+│       └── Word de ejemplo  # Específico del programa usado en la empresa
+├── main.py
+└── README.md
+Detalles de los Archivos
+Carpeta datahandler
+data_handler.py:
+
+Maneja las operaciones de lectura, escritura y manipulación de datos en archivos Excel.
+Proporciona métodos para obtener tomas (takes), diálogos (intervenciones), marcar intervenciones como completas, actualizar diálogos, guardar cambios, obtener personajes con diálogos incompletos, y más.
+data_validator.py:
+
+Valida la existencia de columnas necesarias en un DataFrame.
+Lanza excepciones si faltan columnas requeridas.
+excel_handler.py:
+
+Carga y guarda datos desde/hacia un archivo Excel utilizando pandas.
+Maneja la lógica de carga y guardado de las hojas "Takes" e "Intervenciones".
+exceptions.py:
+
+Define excepciones personalizadas (FileNotFoundError, ColumnError) para manejar errores específicos.
+Carpeta gui
+character_filter_dialog.py:
+
+Define una ventana de diálogo para seleccionar personajes con casillas de verificación y una barra de búsqueda para filtrar personajes.
+custom_widgets.py:
+
+Contiene varias clases personalizadas para la interfaz gráfica, como etiquetas para personajes, cuadros de mensaje personalizados, campos de edición de código de tiempo y diálogos de filtrado de personajes.
+main_widget.py:
+
+Widget principal de la aplicación que permite abrir archivos Excel y navegar a otras secciones.
+Muestra una tabla con personajes y su progreso de completado.
+Maneja la lógica para abrir y actualizar el archivo Excel.
+main_window.py:
+
+Define la ventana principal de la aplicación.
+Inicializa y muestra MainWidget al iniciar.
+Permite cambiar a GidoiaWidget.
+gidoia_widget.py:
+
+Widget para manejar la visualización y edición de tomas y diálogos.
+Permite buscar tomas y personajes, navegar entre tomas, marcar intervenciones como completas, y más.
+utils.py:
+
+Funciones auxiliares, como cargar hojas de estilo CSS.
+Carpeta resources
+main.css:
+
+Hoja de estilo CSS para definir la apariencia de la interfaz gráfica.
+Resumen de Funcionalidades
+Manejo de Datos: Carga, manipulación y guardado de datos en archivos Excel utilizando pandas.
+Interfaz Gráfica: Creación de una GUI usando PyQt5, con ventanas de diálogo personalizadas, widgets para mostrar y editar información, y botones de navegación.
+Validación de Datos: Validación de columnas en DataFrames y manejo de excepciones específicas.
+Estilo Visual: Aplicación de una hoja de estilo CSS para una apariencia consistente y personalizada.

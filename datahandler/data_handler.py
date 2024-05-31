@@ -19,7 +19,7 @@ class DataHandler:
 
     def mark_complete(self, intervention_id, state):
         DataValidator.validate_columns(['ID', 'Completo'], self.intervenciones)
-        self.intervenciones.loc[self.intervenciones['ID'] == intervention_id, 'Completo'] = state
+        self.intervenciones.loc[self.intervenciones['ID'] == intervention_id, 'Completo'] = int(state)
 
     def update_dialogue(self, intervention_id, new_dialogue):
         DataValidator.validate_columns(['ID', 'Dialogo'], self.intervenciones)

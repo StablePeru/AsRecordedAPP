@@ -1,3 +1,4 @@
+# main_window.py
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from .main_widget import MainWidget
 from .gidoia_widget import GidoiaWidget

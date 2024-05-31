@@ -1,8 +1,31 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel, QGridLayout, QScrollArea, QMessageBox, QCompleter, QPlainTextEdit, QCheckBox, QProgressBar, QStyleFactory, QStyle, QShortcut
-from PyQt5.QtCore import Qt, QEvent, QTimer
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QLabel, QGridLayout, QScrollArea, QMessageBox, QCompleter, QPlainTextEdit, QCheckBox, QProgressBar, QStyleFactory, QStyle, QShortcut, QGraphicsOpacityEffect
+from PyQt5.QtCore import Qt, QEvent, QTimer, QPropertyAnimation, QEasingCurve
 from PyQt5.QtGui import QValidator, QKeySequence
 from .custom_widgets import CharacterLabel, TimecodeLineEdit, CustomMessageBox, CharacterFilterDialog
 import pandas as pd
+
+class ChangeHistory:
+    def __init__(self):
+        self.undo_stack = []
+        self.redo_stack = []
+
+    def add_change(self, change):
+        self.undo_stack.append(change)
+        self.redo_stack.clear()  # Clear redo stack on new change
+
+    def undo(self):
+        if not self.undo_stack:
+            return None
+        change = self.undo_stack.pop()
+        self.redo_stack.append(change)
+        return change
+
+    def redo(self):
+        if not self.redo_stack:
+            return None
+        change = self.redo_stack.pop()
+        self.undo_stack.append(change)
+        return change
 
 class GidoiaWidget(QWidget):
     def __init__(self, data_handler, parent=None):
@@ -26,30 +49,173 @@ class GidoiaWidget(QWidget):
         self.load_take(self.current_take_number)
         self.setup_shortcuts()
 
+        self.change_history = ChangeHistory()  # Historial de cambios
+
     def setup_shortcuts(self):
         QShortcut(QKeySequence("Ctrl+N"), self, self.load_next_take)
         QShortcut(QKeySequence("Ctrl+P"), self, self.load_previous_take)
         QShortcut(QKeySequence("Ctrl+S"), self, self.save_changes)
+        QShortcut(QKeySequence("Ctrl+Z"), self, self.undo_change)
+        QShortcut(QKeySequence("Ctrl+Shift+Z"), self, self.redo_change)
+
+    def undo_change(self):
+        change = self.change_history.undo()
+        if change:
+            self.apply_change(change, undo=True)
+
+    def redo_change(self):
+        change = self.change_history.redo()
+        if change:
+            self.apply_change(change, undo=False)
+
+    def apply_change(self, change, undo):
+        intervention_id, old_value, new_value = change
+        value_to_apply = old_value if undo else new_value
+        self.data_handler.update_dialogue(intervention_id, value_to_apply)
+        self.dialogue_texts[intervention_id].setPlainText(value_to_apply)
+        self.data_handler.save()
 
     def create_search_layouts(self):
-        self.take_search_layout = QHBoxLayout()
+        self.search_layout = QHBoxLayout()
+
         self.take_number_input = QLineEdit()
+        self.take_number_input.setPlaceholderText("Buscar Take...")
         self.take_number_input.returnPressed.connect(self.load_take_from_input)
         self.take_search_button = self.create_button("Take-a bilatu", self.load_take_from_input)
+        self.take_search_layout = QHBoxLayout()
         self.take_search_layout.addWidget(self.take_number_input)
         self.take_search_layout.addWidget(self.take_search_button)
-
-        self.character_search_layout = QHBoxLayout()
+        
+        self.progress_bar = QProgressBar(self)
+        self.progress_bar.setVisible(False)
+        
         self.character_input = QLineEdit()
+        self.character_input.setPlaceholderText("Buscar Personaje...")
         self.character_input.returnPressed.connect(self.load_character_from_input)
         self.character_search_button = self.create_button("Pertsonaia bilatu", self.load_character_from_input)
+        self.character_search_layout = QHBoxLayout()
         self.character_search_layout.addWidget(self.character_input)
         self.character_search_layout.addWidget(self.character_search_button)
 
-        self.search_layout = QHBoxLayout()
         self.search_layout.addLayout(self.take_search_layout)
+        self.search_layout.addWidget(self.progress_bar)
         self.search_layout.addLayout(self.character_search_layout)
         self.main_layout.addLayout(self.search_layout)
+
+        print("Search layouts created, progress bar added to main layout.")  # Debugging message
+
+    def start_search(self):
+        print("Starting search...")  # Debugging message
+        total_interventions = self.get_total_interventions_count(self.character_name)
+        incomplete_interventions = self.get_incomplete_interventions_count(self.character_name)
+        completed_interventions = total_interventions - incomplete_interventions
+        
+        self.progress_bar.setMaximum(total_interventions)
+        self.progress_bar.setValue(completed_interventions)
+        self.progress_bar.setVisible(True)
+        
+        # Aplicar animación solo si la lógica de visibilidad se mantiene
+        self.animate_visibility(self.take_number_input, False)
+        self.animate_visibility(self.take_search_button, False)
+        
+        print("Progress bar is now visible, take search input and button hidden.")  # Debugging message
+    
+    def stop_search(self):
+        print("Stopping search...")  # Debugging message
+        self.progress_bar.setVisible(False)
+        self.take_number_input.setVisible(True)
+        self.take_search_button.setVisible(True)
+        print("Progress bar is now hidden, take search input and button visible.")  # Debugging message
+
+    def animate_visibility(self, widget, visible):
+        if not visible:
+            widget.hide()  # Asegurar que el widget se oculte
+        opacity_effect = QGraphicsOpacityEffect(widget)
+        widget.setGraphicsEffect(opacity_effect)
+        animation = QPropertyAnimation(opacity_effect, b"opacity")
+        animation.setDuration(500)
+        animation.setEasingCurve(QEasingCurve.InOutQuad)
+        if visible:
+            widget.show()
+            animation.setStartValue(0)
+            animation.setEndValue(1)
+        else:
+            animation.setStartValue(1)
+            animation.setEndValue(0)
+            animation.finished.connect(widget.hide)
+        animation.start()
+
+    def get_incomplete_interventions_count(self, character_name):
+        upper_case_characters = self.data_handler.intervenciones['Personaje'].str.upper()
+        character_dialogue = self.data_handler.intervenciones[upper_case_characters == character_name.upper()]
+        incomplete_interventions = character_dialogue[character_dialogue['Completo'] == 0]
+        return len(incomplete_interventions)
+    
+    def get_total_interventions_count(self, character_name):
+        upper_case_characters = self.data_handler.intervenciones['Personaje'].str.upper()
+        character_dialogue = self.data_handler.intervenciones[upper_case_characters == character_name.upper()]
+        return len(character_dialogue)
+
+
+    def validate_character_name(self, character_name):
+        character_name = character_name.upper()
+        upper_case_characters = self.data_handler.intervenciones['Personaje'].str.upper()
+        if character_name not in upper_case_characters.values:
+            QMessageBox.warning(self, "Warning", "Pertsonai hori ez dago.")
+            return None
+        character_dialogue = self.data_handler.intervenciones[upper_case_characters == character_name]
+        if character_dialogue['Completo'].all():
+            QMessageBox.warning(self, "Warning", "Pertsonai hori bukatua dago.")
+            return None
+        return character_name
+
+    def load_character_from_input(self):
+        print("Load character from input called.")  # Debugging message
+        self.clear_focus()
+        character_name = self.validate_character_name(self.character_input.text())
+        if character_name is not None:
+            self.character_name = character_name
+            self.search_active = True
+            self.start_search()  # Iniciar barra de progreso
+            print("Started search for character:", character_name)  # Debugging message
+            take_number = self.find_next_incomplete_take(1, character_name, 1)
+            if take_number is not None:
+                self.current_take_number = take_number
+                self.load_take(self.current_take_number)
+            else:
+                QMessageBox.warning(self, "Warning", f"No hay más intervenciones incompletas para el personaje {character_name}")
+                self.stop_search()  # Detener barra de progreso si no hay más intervenciones
+            if not hasattr(self, 'cancel_search_button'):
+                self.cancel_search_button = self.create_button("Bilaketa bukatu", self.cancel_character_search)
+                self.character_search_layout.addWidget(self.cancel_search_button)
+
+
+    def cancel_character_search(self):
+        self.character_name = None
+        self.search_active = False
+        self.character_input.clear()
+        self.load_take(self.current_take_number)
+        self.character_search_layout.removeWidget(self.cancel_search_button)
+        self.cancel_search_button.deleteLater()
+        del self.cancel_search_button
+        self.stop_search()  # Restaurar la barra de búsqueda de take
+
+
+    def find_next_incomplete_take(self, start_take, character_name, direction):
+        max_take = self.data_handler.takes['Numero Take'].max()
+        progress = 0
+        if direction > 0:
+            range_func = range
+        else:
+            range_func = lambda start, end: range(start, end, -1)
+        for take_number in range_func(start_take, max_take + 1 if direction > 0 else 0):
+            dialogue_data = self.data_handler.get_dialogue(take_number)
+            if any((dialogue_data['Personaje'] == character_name) & (dialogue_data['Completo'] == 0)):
+                self.progress_bar.setValue(progress)
+                return take_number
+            progress += 1
+        return None
+
 
     def create_navigation_buttons(self):
         self.navigation_layout = QHBoxLayout()
@@ -110,60 +276,11 @@ class GidoiaWidget(QWidget):
             self.current_take_number = take_number
             self.load_take(self.current_take_number)
 
-    def validate_character_name(self, character_name):
-        character_name = character_name.upper()
-        upper_case_characters = self.data_handler.intervenciones['Personaje'].str.upper()
-        if character_name not in upper_case_characters.values:
-            QMessageBox.warning(self, "Warning", "Pertsonai hori ez dago.")
-            return None
-        character_dialogue = self.data_handler.intervenciones[upper_case_characters == character_name]
-        if character_dialogue['Completo'].all():
-            QMessageBox.warning(self, "Warning", "Pertsonai hori bukatua dago.")
-            return None
-        return character_name
-
-    def load_character_from_input(self):
-        self.clear_focus()
-        character_name = self.validate_character_name(self.character_input.text())
-        if character_name is not None:
-            self.character_name = character_name
-            self.search_active = True
-            take_number = self.find_next_incomplete_take(1, character_name, 1)
-            if take_number is not None:
-                self.current_take_number = take_number
-                self.load_take(self.current_take_number)
-            else:
-                QMessageBox.warning(self, "Warning", f"No hay más intervenciones incompletas para el personaje {character_name}")
-            if not hasattr(self, 'cancel_search_button'):
-                self.cancel_search_button = self.create_button("Bilaketa bukatu", self.cancel_character_search)
-                self.character_search_layout.addWidget(self.cancel_search_button)
-
-    def find_next_incomplete_take(self, start_take, character_name, direction):
-        max_take = self.data_handler.takes['Numero Take'].max()
-        if direction > 0:
-            range_func = range
-        else:
-            range_func = lambda start, end: range(start, end, -1)
-        for take_number in range_func(start_take, max_take + 1 if direction > 0 else 0):
-            dialogue_data = self.data_handler.get_dialogue(take_number)
-            if any((dialogue_data['Personaje'] == character_name) & (dialogue_data['Completo'] == 0)):
-                return take_number
-        return None
-
-    def cancel_character_search(self):
-        self.character_name = None
-        self.search_active = False
-        self.character_input.clear()
-        self.load_take(self.current_take_number)
-        self.character_search_layout.removeWidget(self.cancel_search_button)
-        self.cancel_search_button.deleteLater()
-        del self.cancel_search_button
-
     def load_take(self, take_number):
         try:
             take_data = self.data_handler.get_take(take_number)
             dialogue_data = self.data_handler.get_dialogue(take_number)
-            self.take_label.setText(f"Take {take_number}: {take_data['IN'].values[0]} - {take_data['OUT'].values[0]}")
+            self.take_label.setText(f"<b>Take {take_number}:</b> {take_data['IN'].values[0]} - {take_data['OUT'].values[0]}")
         except KeyError as e:
             QMessageBox.critical(self, "Error", f"Missing column in data: {str(e)}")
             return
@@ -229,7 +346,9 @@ class GidoiaWidget(QWidget):
         for dialogue_text in self.dialogue_texts.values():
             self.adjust_text_edit_height(dialogue_text)
 
+        self.update_progress_bar()  # Actualizar la barra de progreso al cargar un take
         QTimer.singleShot(0, self.force_resize)
+
 
     def create_complete_check_box(self, row):
         complete_check_box = QCheckBox()
@@ -358,7 +477,22 @@ class GidoiaWidget(QWidget):
         dialogue_text.style().polish(dialogue_text)
         dialogue_text.update()
 
+        self.update_progress_bar()  # Actualizar la barra de progreso
         self.data_handler.save()
+
+
+    def update_progress_bar(self):
+        if self.character_name:  # Verificar que self.character_name no sea una cadena vacía
+            total_interventions = self.get_total_interventions_count(self.character_name)
+            incomplete_interventions = self.get_incomplete_interventions_count(self.character_name)
+            completed_interventions = total_interventions - incomplete_interventions
+            self.progress_bar.setMaximum(total_interventions)
+            self.progress_bar.setValue(completed_interventions)
+        else:
+            self.progress_bar.setValue(0)
+
+
+
 
     def save_changes(self):
         self.data_handler.save()
