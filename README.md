@@ -1,28 +1,27 @@
-
 # AsRecordedAPP
 
-## Descripción
+## Description
 
-**AsRecordedAPP** es una aplicación de gestión de diálogos y toma de datos que facilita la organización y edición de información en hojas de Excel. Esta aplicación está construida utilizando PyQt5 para la interfaz gráfica de usuario y Pandas para la manipulación de datos en Excel.
+**AsRecordedAPP** is a dialogue management and data collection application that facilitates the organization and editing of information in Excel sheets. This application is built using PyQt5 for the graphical user interface and Pandas for data manipulation in Excel.
 
-## Tabla de Contenidos
-- [Descripción](#descripción)
-- [Características](#características)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Instalación](#instalación)
-- [Uso](#uso)
-- [Contribuir](#contribuir)
-- [Licencia](#licencia)
-- [Contacto](#contacto)
+## Table of Contents
+- [Description](#description)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Características
-- **Cargar y visualizar hojas de Excel**: Permite cargar cualquier archivo Excel y visualizar su contenido dentro de la aplicación.
-- **Filtrar y buscar personajes y diálogos**: Búsqueda rápida a través de diálogos y personajes mediante un filtro avanzado.
-- **Marcar intervenciones como completas**: Una opción para hacer seguimiento del progreso al marcar diálogos como completos.
-- **Editar y guardar cambios en Excel**: Los cambios se guardan directamente en el archivo original, lo que facilita el flujo de trabajo.
-- **Navegación entre tomas y personajes**: Navegación sencilla y rápida entre las diferentes tomas, con la posibilidad de filtrar por personaje.
+## Features
+- **Load and view Excel sheets**: Allows loading any Excel file and viewing its content within the application.
+- **Filter and search characters and dialogues**: Quickly search through dialogues and characters using an advanced filter.
+- **Mark interventions as complete**: An option to track progress by marking dialogues as complete.
+- **Edit and save changes in Excel**: Changes are saved directly in the original file, making the workflow easier.
+- **Navigation between takes and characters**: Easy and fast navigation between different takes, with the ability to filter by character.
 
-## Estructura del Proyecto
+## Project Structure
 
 ```plaintext
 AsRecordedAPP/
@@ -44,91 +43,92 @@ AsRecordedAPP/
 │   └── main.css
 ├── PreparacionExcel/
 │   ├── Excel/
-│   │   └── Excel de ejemplo
+│   │   └── Example Excel
 │   ├── scripts/
-│   │   ├── CrearTxt.py  # Crea un txt adecuado para el programa con el word de referencia
-│   │   └── PandasGuion.py  # Crea el xlsx usando el txt de referencia
+│   │   ├── CrearTxt.py  # Creates a suitable txt for the program using the reference word
+│   │   └── PandasGuion.py  # Creates the xlsx using the reference txt
 │   ├── Txt/
-│   │   └── Txt de ejemplo  # Recomendado como plantilla para trabajar con el programa
+│   │   └── Example Txt  # Recommended as a template to work with the program
 │   └── Word/
-│       └── Word de ejemplo  # Específico del programa usado en la empresa
+│       └── Example Word  # Specific to the program used by the company
 ├── main.py
 └── README.md
 ```
 
-## Instalación
+## Installation
 
-1. Ve a la carpeta que desees y clona este repositorio:
+1. Navigate to the desired folder and clone this repository:
 
     ```sh
     git clone https://github.com/StablePeru/AsRecorded.git
     cd AsRecordedAPP
     ```
 
-2. Crea y activa un entorno virtual (opcional pero recomendado):
+2. Create and activate a virtual environment (optional but recommended):
 
     ```sh
     python -m venv venv
     ```
 
-    2.1 En **Mac** y **Linux**:
+    2.1 On **Mac** and **Linux**:
 
     ```sh
     source venv/bin/activate
     ```
 
-    2.2 En **Windows**:
+    2.2 On **Windows**:
 
     ```sh
-    .\venv\Scripts\activate
+    .
+env\Scripts ctivate
     ```
 
-3. Instala las dependencias:
+3. Install the dependencies:
 
     ```sh
     pip install -r requirements.txt
     ```
 
-4. Si tienes problemas con la instalación de alguna dependencia, asegúrate de tener `pip` actualizado:
+4. If you have issues installing any dependency, make sure `pip` is updated:
 
     ```sh
     python -m pip install --upgrade pip
     ```
 
-5. Ejecuta la aplicación:
+5. Run the application:
 
     ```sh
     python main.py
     ```
 
-## Uso
+## Usage
 
-1. Ejecuta la aplicación:
+1. Run the application:
 
     ```sh
     python main.py
     ```
 
-2. Usa la interfaz para cargar y editar archivos de Excel, navegar entre tomas y personajes, y marcar intervenciones como completas.
+2. Use the interface to load and edit Excel files, navigate between takes and characters, and mark interventions as complete.
 
-## Contribuir
+## Contributing
 
-Si deseas contribuir a este proyecto, sigue estos pasos:
+If you wish to contribute to this project, follow these steps:
 
-1. Haz un fork del proyecto.
-2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
-3. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva característica'`).
-4. Haz push a la rama (`git push origin feature/nueva-caracteristica`).
-5. Abre un Pull Request.
+1. Fork the project.
+2. Create a new branch (`git checkout -b feature/new-feature`).
+3. Make your changes and commit them (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/new-feature`).
+5. Open a Pull Request.
 
-## Recursos
-- [Documentación de PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/)
-- [Documentación de Pandas](https://pandas.pydata.org/docs/)
+## Resources
+- [PyQt5 Documentation](https://www.riverbankcomputing.com/static/Docs/PyQt5/)
+- [Pandas Documentation](https://pandas.pydata.org/docs/)
 
-## Licencia
+## License
 
-Este proyecto está licenciado bajo la [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
-## Contacto
+## Contact
 
-Para cualquier pregunta o sugerencia, por favor contacta a stableperu@gmail.com.
+For any questions or suggestions, please contact stableperu@gmail.com.
