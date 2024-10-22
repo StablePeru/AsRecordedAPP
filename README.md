@@ -73,7 +73,7 @@ AsRecordedAPP/
     2.1 On **Mac** and **Linux**:
 
     ```sh
-    source venv/bin/activate
+    source env/bin/activate
     ```
 
     2.2 On **Windows**:
