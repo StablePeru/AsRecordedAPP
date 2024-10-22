@@ -79,7 +79,7 @@ AsRecordedAPP/
     2.2 On **Windows**:
 
     ```sh
-env\Scripts ctivate
+    env\Scripts ctivate
     ```
 
 3. Install the dependencies:
