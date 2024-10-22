@@ -79,7 +79,6 @@ AsRecordedAPP/
     2.2 On **Windows**:
 
     ```sh
-    .
 env\Scripts ctivate
     ```
 
