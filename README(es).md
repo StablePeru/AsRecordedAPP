@@ -60,26 +60,26 @@ AsRecordedAPP/
 1. Ve a la carpeta que desees y clona este repositorio:
 
     ```sh
-    git clone https://github.com/StablePeru/AsRecorded.git
+    git clone https://github.com/StablePeru/AsRecordedAPP.git
     cd AsRecordedAPP
     ```
 
 2. Crea y activa un entorno virtual (opcional pero recomendado):
 
     ```sh
-    python -m venv venv
+    python -m venv env
     ```
 
     2.1 En **Mac** y **Linux**:
 
     ```sh
-    source venv/bin/activate
+    source env/bin/activate
     ```
 
     2.2 En **Windows**:
 
     ```sh
-    .\venv\Scripts\activate
+    env\Scripts\activate
     ```
 
 3. Instala las dependencias:
@@ -92,12 +92,6 @@ AsRecordedAPP/
 
     ```sh
     python -m pip install --upgrade pip
-    ```
-
-5. Ejecuta la aplicación:
-
-    ```sh
-    python main.py
     ```
 
 ## Uso
