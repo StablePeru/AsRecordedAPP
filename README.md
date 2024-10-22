@@ -60,7 +60,7 @@ AsRecordedAPP/
 1. Navigate to the desired folder and clone this repository:
 
     ```sh
-    git clone https://github.com/StablePeru/AsRecorded.git
+    git clone https://github.com/StablePeru/AsRecordedAPP.git
     cd AsRecordedAPP
     ```
 
