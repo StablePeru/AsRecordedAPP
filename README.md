@@ -67,7 +67,7 @@ AsRecordedAPP/
 2. Create and activate a virtual environment (optional but recommended):
 
     ```sh
-    python -m venv venv
+    python -m venv env
     ```
 
     2.1 On **Mac** and **Linux**:
@@ -79,7 +79,7 @@ AsRecordedAPP/
     2.2 On **Windows**:
 
     ```sh
-    env\Scripts ctivate
+    env\Scripts\activate
     ```
 
 3. Install the dependencies:
@@ -92,12 +92,6 @@ AsRecordedAPP/
 
     ```sh
     python -m pip install --upgrade pip
-    ```
-
-5. Run the application:
-
-    ```sh
-    python main.py
     ```
 
 ## Usage
